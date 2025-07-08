@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: flask-backend
+    env: python
+    plan: free
+    buildCommand: |
+      echo "Using Python $(python --version)"
+      pip install --upgrade pip setuptools wheel
+      pip install -r requirements.txt
+    startCommand: gunicorn main:app --bind 0.0.0.0:$PORT
+    runtime: python-3.10.13
+    rootDir: .
